@@ -2,7 +2,7 @@
     
     header('Content-type: text/html; charset=utf-8');
 
-    $mysqli=new mysqli('localhost', 'd98194uh_wer', '12345678', 'd98194uh_wer');
+    $mysqli=new mysqli('localhost', 'daryenaya', '@Hasbik1609D', 'daryenaya');
      
     if($mysqli->connect_errno){
     	$msg='Не удалось подключиться к БД.';

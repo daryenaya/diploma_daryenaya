@@ -1,42 +1,40 @@
 <?php
-    require_once 'connect.php'; 
+require_once 'connect.php'; 
+
+session_start();
+
+$error = $user = $pass = "";
+
+// Проверяем, был ли отправлен запрос с формы
+if (isset($_POST['login'])) {
+    $login = $_POST['login'];
+    $pass = $_POST['pass'];
     
-    $error = $user = $pass = "";
-    
-    if (isset($_POST['login']))
-    {
-        $login = $_POST['login'];
-        $pass = $_POST['pass'];
+    if ($login == "" || $pass == "") {
+        $error = "Не все поля заполнены";
+    } else {
+        // Запрос на проверку логина и пароля
+        $query = "SELECT Логин, Пароль FROM Пользователи WHERE Логин='$login' AND Пароль='$pass'";
+        $result = $mysqli->query($query);
         
-        if ($login == "" || $pass == "")
-            $error = "Не все поля заполнены";
-        else
-        {
-            $query = "SELECT Логин, Пароль FROM Пользователи WHERE Логин='$login' AND Пароль='$pass'";
-            $result = $mysqli->query($query);
+        // Если нет таких данных в базе
+        if ($result->num_rows == 0) {
+            $error = "Неверный логин или пароль";
+        } else {
+            // Если данные есть
+            $line = $result->fetch_assoc();
             
-            if ($result->num_rows == 0)
-            {
-                $error = "Неверный логин или пароль";
-            }
-            else
-            {
-                $line = $result -> fetch_assoc();
-                
-                $_SESSION['login'] = $user;
-                $_SESSION['pass'] = $pass;
-                
-                session_start();
-      			
-      			$_SESSION['$logSESS'] = $user[login];
-      			header("location: admin.php");
-      			exit;			
-            }
+            $_SESSION['login'] = $line['Логин'];
+            $_SESSION['pass'] = $pass;
             
+            // Сохраняем логин в сессии для дальнейшего использования
+            $_SESSION['$logSESS'] = $line['Логин'];  // Обратите внимание на исправление строки
+            
+            header("location: admin.php");
+            exit;			
         }
     }
-    
-    $login = $_GET['login'];
+}
 
     echo '<!doctype html>
 <html class="no-js" lang="">
@@ -128,4 +126,5 @@
         <script src="js/main.js"></script>
     </body>
     </html>';
+
 ?>

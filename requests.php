@@ -32,7 +32,7 @@
         Basic
         ========================================== -->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>ФотоМастер</title>		
+        <title>ФотоСтудия</title>		
 		<!-- =========================================
         Mobile Configurations
         ========================================== -->
@@ -81,7 +81,7 @@
 	                <span class="icon-bar"></span>
 	            </button>
 	            <a class="navbar-brand" href="admin.php">
-	                <p>ФотоМастер<span> admin panel</span></p>
+	                <p>ФотоСтудия<span> admin panel</span></p>
 	            </a>
 	        </div>
 	        <!-- Top Menu Items -->
